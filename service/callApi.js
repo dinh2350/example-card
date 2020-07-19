@@ -18,3 +18,18 @@ export function deleteProduct(id) {
     url: `${baseUrl}/sanPham/${id}`,
   });
 }
+
+export function getProductById(id) {
+  return axios({
+    method: "GET",
+    url: `${baseUrl}/sanPham/${id}`,
+  });
+}
+
+export function updateProductById(product) {
+  return axios({
+    method: "PUT",
+    url: `${baseUrl}/sanPham/${product.id}`,
+    data: product,
+  });
+}

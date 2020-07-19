@@ -22,6 +22,7 @@
   </head>
   <body>
     <div class="container">
+      <h1 class="text-center">Product</h1>
       <section class="filter">
         <div class="row">
           <div class="col-6">
@@ -69,6 +70,7 @@
         </div>
       </section>
       <section class="card">
+        <h2 class="text-center">Card</h2>
         <table class="table">
           <thead>
             <tr>
@@ -78,25 +80,7 @@
               <th>action</th>
             </tr>
           </thead>
-          <tbody id="cardList">
-            <tr>
-              <td>
-                <img
-                  style="width: 200px;"
-                  class="img-thumbnail"
-                  src="https://lh5.googleusercontent.com/-XL1IAlCZ5fg/W2cUTq-PtiI/AAAAAAAAAOQ/Y6nm898IAS80PstbtuSibMHPVGgsW67eQCLcBGAs/s1600/EmXinh2k__hinh-anh-gai-dep-nong-bong%2B%25288%2529.jpg"
-                  alt=""
-                />
-              </td>
-              <td>cô giáo</td>
-              <td>1000$</td>
-              <td class="d-flex justify-content-between align-items-center">
-                <button class="btn btn-outline-info">+</button>
-                <p>10</p>
-                <button class="btn btn-outline-info">-</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="cardList"></tbody>
         </table>
       </section>
 
@@ -139,6 +123,23 @@
               </div>
               <div class="modal-body">
                 <form id="submitProduct">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >id</span
+                      >
+                    </div>
+                    <input
+                      disabled
+                      type="text"
+                      id="productId"
+                      class="form-control"
+                      aria-label="Default"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                  </div>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span
@@ -240,7 +241,14 @@
                     Close
                   </button>
                   <button type="submit" class="btn btn-primary">
-                    Save changes
+                    Create Product
+                  </button>
+                  <button
+                    type="button"
+                    id="updateProduct"
+                    class="btn btn-primary"
+                  >
+                    Update Product
                   </button>
                 </form>
               </div>

@@ -2,13 +2,17 @@ import {
   getListProduct,
   createProduct,
   deleteProduct,
+  getProductById,
+  updateProductById,
 } from "../service/callApi.js";
+import { saveLocalStorage, getLocalStorage } from "../util/localStorage.js";
 // declare
 let productList = [];
 let cardList = [];
 let productTemp;
+
 // setup
-(function setUp() {
+function setUp() {
   getListProduct()
     .then(function (res) {
       productList = res.data;
@@ -19,19 +23,8 @@ let productTemp;
     .catch(function (err) {
       console.log(err);
     });
-})();
-
-// LocalStorage
-function saveLocalStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
 }
-function getLocalStorage(key) {
-  if (localStorage.getItem(key)) {
-    return JSON.parse(localStorage.getItem(key));
-  } else {
-    return;
-  }
-}
+setUp();
 
 // render
 function renderListProduct(list) {
@@ -107,7 +100,10 @@ function renderListProductForAdmin(list) {
       <button class="btn btn-danger" onclick="handleRemoveProduct(${item.id})">
         <i class="fa fa-trash-alt"></i>
       </button>
-      <button class="btn btn-info">
+      <button data-toggle="modal"
+              data-target="#addProduct"
+              class="btn btn-info" onclick="handleEditProduct(${item.id})"
+      >
         <i class="fa fa-pencil-alt"></i>
       </button>
     </td>
@@ -120,21 +116,25 @@ function renderListProductForAdmin(list) {
 // handle event
 window.handleAddToCard = handleAddToCard;
 function handleAddToCard(id) {
-  let newCard;
-  const card = productList.find(function (product) {
-    return product.id == id;
-  });
-  const isExist = cardList.findIndex(function (card) {
-    return card.id == id;
-  });
-  if (isExist >= 0) {
-    cardList[isExist].quantity++;
-  } else {
-    newCard = { ...card, quantity: 1 };
-    cardList.push(newCard);
-  }
-  renderListCard(cardList);
-  saveLocalStorage("cardList", cardList);
+  getProductById(id)
+    .then(function (res) {
+      let newCard;
+      const card = res.data;
+      const isExist = cardList.findIndex(function (card) {
+        return card.id == id;
+      });
+      if (isExist >= 0) {
+        cardList[isExist].quantity++;
+      } else {
+        newCard = { ...card, quantity: 1 };
+        cardList.push(newCard);
+      }
+      renderListCard(cardList);
+      saveLocalStorage("cardList", cardList);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
 document.getElementById("proName").addEventListener("change", function (e) {
   let productTemp;
@@ -175,6 +175,7 @@ document.getElementById("proType").addEventListener("change", function (e) {
   });
   renderListProduct(productTemp);
 });
+
 window.incrementQuantity = incrementQuantity;
 function incrementQuantity(id) {
   const isExist = cardList.findIndex(function (product) {
@@ -183,6 +184,7 @@ function incrementQuantity(id) {
   cardList[isExist].quantity++;
   renderListCard(cardList);
 }
+
 window.decrementQuantity = decrementQuantity;
 function decrementQuantity(id) {
   const isExist = cardList.findIndex(function (product) {
@@ -191,6 +193,7 @@ function decrementQuantity(id) {
   if (cardList[isExist].quantity > 0) cardList[isExist].quantity--;
   renderListCard(cardList);
 }
+
 window.handleDelete = handleDelete;
 function handleDelete(id) {
   const isExist = cardList.findIndex(function (product) {
@@ -220,8 +223,16 @@ document
     };
     createProduct(newProduct)
       .then(function (res) {
-        setUp();
-        renderListProductForAdmin(productList);
+        getListProduct()
+          .then(function (res) {
+            productList = res.data;
+            saveLocalStorage("productList", productList);
+            renderListProduct(productList);
+            renderListProductForAdmin(productList);
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
       })
       .catch(function (err) {
         console.log(err);
@@ -248,3 +259,56 @@ function handleRemoveProduct(id) {
       console.log(err);
     });
 }
+
+window.handleEditProduct = handleEditProduct;
+function handleEditProduct(id) {
+  getProductById(id)
+    .then(function (res) {
+      const card = res.data;
+      document.getElementById("productName").value = card.name;
+      document.getElementById("productImage").value = card.image;
+      document.getElementById("productPrice").value = card.price;
+      document.getElementById("productInventory").value = card.inventory;
+      document.getElementById("productRating").value = card.rating;
+      document.getElementById("productType").value = card.type;
+      document.getElementById("productId").value = card.id;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+}
+
+document.getElementById("updateProduct").addEventListener("click", function () {
+  const name = document.getElementById("productName").value;
+  const image = document.getElementById("productImage").value;
+  const price = document.getElementById("productPrice").value;
+  const inventory = document.getElementById("productInventory").value;
+  const rating = document.getElementById("productRating").value;
+  const type = document.getElementById("productType").value;
+  const id = document.getElementById("productId").value;
+  const newProduct = {
+    id,
+    name,
+    image,
+    price,
+    inventory,
+    rating,
+    type,
+  };
+  updateProductById(newProduct)
+    .then(function (res) {
+      getListProduct()
+        .then(function (res) {
+          productList = res.data;
+          saveLocalStorage("productList", productList);
+          renderListProduct(productList);
+          renderListProductForAdmin(productList);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
