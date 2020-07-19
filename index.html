@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <section class="filter">
+        <div class="row">
+          <div class="col-6">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="proName">Name</label>
+              </div>
+              <select class="custom-select" id="proName">
+                <option selected>Choose...</option>
+                <option value="asc">A-Z</option>
+                <option value="desc">Z-A</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="proType">Type</label>
+              </div>
+              <select class="custom-select" id="proType">
+                <option selected>Choose...</option>
+                <option value="Samsung">SameSung</option>
+                <option value="Iphone">Iphone</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="cart">
+        <div class="row" id="productList">
+          <div class="col-3 my-2">
+            <div class="card text-left">
+              <img
+                class="card-img-top"
+                src="https://xinhgai.tv/wp-content/uploads/2020/04/suryxin-hot-girl-tiktok-trung-quoc-6.jpg"
+                alt=""
+              />
+              <div class="card-body">
+                <h4 class="card-title">suryxin</h4>
+                <p class="card-text">30k</p>
+                <p class="card-text">Samsung</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>image</th>
+              <th>name</th>
+              <th>price</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <tbody id="cardList">
+            <tr>
+              <td>
+                <img
+                  style="width: 200px;"
+                  class="img-thumbnail"
+                  src="https://lh5.googleusercontent.com/-XL1IAlCZ5fg/W2cUTq-PtiI/AAAAAAAAAOQ/Y6nm898IAS80PstbtuSibMHPVGgsW67eQCLcBGAs/s1600/EmXinh2k__hinh-anh-gai-dep-nong-bong%2B%25288%2529.jpg"
+                  alt=""
+                />
+              </td>
+              <td>cô giáo</td>
+              <td>1000$</td>
+              <td class="d-flex justify-content-between align-items-center">
+                <button class="btn btn-outline-info">+</button>
+                <p>10</p>
+                <button class="btn btn-outline-info">-</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="admin my-3">
+        <h2 class="text-center">Admin</h2>
+        <!-- modal -->
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn btn-success my-3"
+          data-toggle="modal"
+          data-target="#addProduct"
+        >
+          ADD <i class="fa fa-plus-square"></i>
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="addProduct"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="addProductTitle"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                  Add Product | Edit Product
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="submitProduct">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >name</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      id="productName"
+                      class="form-control"
+                      aria-label="Default"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >image</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      id="productImage"
+                      class="form-control"
+                      aria-label="Default"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >price</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      id="productPrice"
+                      class="form-control"
+                      aria-label="Default"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >inventory</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      id="productInventory"
+                      class="form-control"
+                      aria-label="Default"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >rating</span
+                      >
+                    </div>
+                    <input
+                      type="text"
+                      id="productRating"
+                      class="form-control"
+                      aria-label="Default"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="productType"
+                        >Type</label
+                      >
+                    </div>
+                    <select class="custom-select" id="productType">
+                      <option selected>Choose...</option>
+                      <option value="SameSung">SameSung</option>
+                      <option value="Sony">Sony</option>
+                      <option value="Iphone">Iphone</option>
+                    </select>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save changes
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">image</th>
+              <th scope="col">name</th>
+              <th scope="col">description</th>
+              <th scope="col">price</th>
+              <th scope="col">inventory</th>
+              <th scope="col">rating</th>
+              <th scope="col">type</th>
+              <th scope="col">actions</th>
+            </tr>
+          </thead>
+          <tbody id="productListForAdmin">
+            <tr>
+              <th>
+                <img
+                  style="width: 200px;"
+                  class="img-thumbnail"
+                  src="https://lh5.googleusercontent.com/-XL1IAlCZ5fg/W2cUTq-PtiI/AAAAAAAAAOQ/Y6nm898IAS80PstbtuSibMHPVGgsW67eQCLcBGAs/s1600/EmXinh2k__hinh-anh-gai-dep-nong-bong%2B%25288%2529.jpg"
+                  alt=""
+                />
+              </th>
+              <td>name</td>
+              <td>description</td>
+              <td>price</td>
+              <th>inventory</th>
+              <td>rating</td>
+              <td>type</td>
+              <td>
+                <button class="btn btn-danger">
+                  <i class="fa fa-trash-alt"></i>
+                </button>
+                <button class="btn btn-info">
+                  <i class="fa fa-pencil-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>
